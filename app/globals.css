@@ -1,0 +1,173 @@
+@import "tailwindcss";
+
+/* ---------------------------------------------------------------------------
+   Design tokens. Four colors, two typefaces, no radius, no shadows.
+   Every surface on the site is built from these values.
+--------------------------------------------------------------------------- */
+@theme {
+  --color-obsidian: #0f1412; /* primary text, dark statement surfaces */
+  --color-evergreen: #2d3834; /* brand surfaces: capabilities band, footer */
+  --color-stone: #a7a299; /* hairline rules, and muted text on dark */
+  /* Stone darkened to the same hue. Stone itself reads at 2.3:1 on Bone,
+     which fails AA, so small muted text on light surfaces uses this. */
+  --color-stone-ink: #6e6a62;
+  --color-bone: #f4f2ec; /* light backgrounds, and all text on dark */
+
+  --font-display: var(--font-sora), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+
+  /* Hard rectangular edges are a brand rule, so every radius token is zero. */
+  --radius-xs: 0px;
+  --radius-sm: 0px;
+  --radius-md: 0px;
+  --radius-lg: 0px;
+  --radius-xl: 0px;
+  --radius-2xl: 0px;
+  --radius-3xl: 0px;
+  --radius-4xl: 0px;
+}
+
+/* ---------------------------------------------------------------------------
+   Base
+--------------------------------------------------------------------------- */
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background-color: var(--color-bone);
+  color: var(--color-obsidian);
+  font-family: var(--font-sans);
+  letter-spacing: 0.025em;
+  font-size: 1rem;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Nothing on this site is rounded. */
+* {
+  border-radius: 0;
+}
+
+/* Visible keyboard focus on every interactive element, on light and dark. */
+:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
+}
+
+::selection {
+  background-color: var(--color-obsidian);
+  color: var(--color-bone);
+}
+
+/* ---------------------------------------------------------------------------
+   Type system
+--------------------------------------------------------------------------- */
+
+/* Display lines: Sora, tight leading, fluid sizing. */
+.display {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 0.98;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+/* Section headings: Sora 600. */
+.heading {
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+
+/* The tracked uppercase treatment from the brand board. Used for section
+   labels and short display lines, deliberately and sparingly. */
+.label {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 0.6875rem;
+  line-height: 1.4;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* Body copy never exceeds a comfortable measure. */
+.measure {
+  max-width: 65ch;
+}
+
+.measure-wide {
+  max-width: 75ch;
+}
+
+/* ---------------------------------------------------------------------------
+   Rules. 1px Stone hairlines are the only dividers used on the site.
+--------------------------------------------------------------------------- */
+.rule {
+  border-color: color-mix(in srgb, var(--color-stone) 55%, transparent);
+}
+
+.rule-on-dark {
+  border-color: color-mix(in srgb, var(--color-stone) 45%, transparent);
+}
+
+/* ---------------------------------------------------------------------------
+   Motion. Exactly one orchestrated reveal, on the home hero, on load.
+   Everything else on the site moves only in response to user action.
+--------------------------------------------------------------------------- */
+@keyframes reveal {
+  from {
+    opacity: 0;
+    transform: translateY(0.75rem);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.reveal {
+  opacity: 0;
+  animation: reveal 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.reveal-1 { animation-delay: 0.05s; }
+.reveal-2 { animation-delay: 0.2s; }
+.reveal-3 { animation-delay: 0.35s; }
+.reveal-4 { animation-delay: 0.5s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    animation: none;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Imagery. Muted monochrome architecture and landscape photography, pushed
+   toward the brand evergreen. Applied over swappable placeholders.
+--------------------------------------------------------------------------- */
+.duotone img,
+.duotone > picture > img {
+  filter: grayscale(1) contrast(1.05) brightness(0.92);
+}
+
+.duotone::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: var(--color-evergreen);
+  mix-blend-mode: color;
+  opacity: 0.55;
+  pointer-events: none;
+}
