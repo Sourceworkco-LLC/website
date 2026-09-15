@@ -1,12 +1,13 @@
 import type { Metadata } from "next";
 import { PageHero } from "@/components/PageHero";
 import { Section, SectionLabel } from "@/components/Section";
+import { Pipeline } from "@/components/Pipeline";
 import { StatementBand } from "@/components/StatementBand";
 import { ClosingCTA } from "@/components/ClosingCTA";
 import { capabilities, engagement, site } from "@/content/site";
 
 const description =
-  "Government procurement, technology and AI implementation, specialized services, and a vetted partner network, delivered under single-point accountability.";
+  "Government procurement, technology and digital solutions, specialized services, and supplier sourcing, delivered under single-point accountability.";
 
 export const metadata: Metadata = {
   title: "Solutions",
@@ -21,7 +22,7 @@ export default function SolutionsPage() {
       <PageHero
         label="Solutions"
         title="Four capabilities, one accountable party."
-        intro="Sourcework holds the contract, the sourcing relationships, and the delivery schedule. You issue one requirement and manage one performance record."
+        intro="Sourcework holds the contract and the coordination. You issue one requirement, manage one point of contact, and evaluate one performance record."
       />
 
       <Section label="Capabilities">
@@ -44,7 +45,8 @@ export default function SolutionsPage() {
                 </ul>
               </div>
               <div className="md:col-span-8">
-                <p className="measure-wide text-lg text-obsidian/80">
+                <p className="heading text-xl text-obsidian">{capability.lede}</p>
+                <p className="measure-wide mt-5 text-lg text-obsidian/80">
                   {capability.summary}
                 </p>
               </div>
@@ -53,17 +55,21 @@ export default function SolutionsPage() {
         </div>
       </Section>
 
-      <Section className="bg-bone" label="How we work with agencies">
-        <SectionLabel>How We Work With Agencies</SectionLabel>
+      <Pipeline />
+
+      <Section className="bg-bone border-t rule" label="How we work with agencies">
+        <SectionLabel>How we work with agencies</SectionLabel>
         <h2 className="heading mt-6 max-w-3xl text-[clamp(1.875rem,4.5vw,3rem)]">
           From solicitation to closeout.
         </h2>
 
         <div className="mt-16 grid gap-px border-t rule sm:grid-cols-2 lg:grid-cols-5">
-          {engagement.map((stage) => (
+          {engagement.map((stage, index) => (
             <div
               key={stage.title}
-              className="border-b rule py-8 lg:border-b-0 lg:border-r lg:pr-6 lg:last:border-r-0 lg:not-first:pl-6"
+              className={`border-b rule py-8 lg:border-b-0 lg:py-10 ${
+                index < engagement.length - 1 ? "lg:border-r lg:pr-6" : ""
+              } ${index > 0 ? "lg:pl-6" : ""}`}
             >
               <h3 className="heading text-lg">{stage.title}</h3>
               <p className="mt-4 text-sm text-obsidian/75">{stage.body}</p>

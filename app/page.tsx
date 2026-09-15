@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { Hero } from "@/components/Hero";
+import { CredentialStrip } from "@/components/CredentialStrip";
 import { CapabilitiesBand } from "@/components/CapabilitiesBand";
-import { ProcessSteps } from "@/components/ProcessSteps";
+import { Pipeline } from "@/components/Pipeline";
+import { Pathways } from "@/components/Pathways";
 import { StatementBand } from "@/components/StatementBand";
 import { ClosingCTA } from "@/components/ClosingCTA";
 import { site } from "@/content/site";
@@ -21,8 +23,10 @@ export default function HomePage() {
   return (
     <>
       <Hero />
+      <CredentialStrip />
       <CapabilitiesBand />
-      <ProcessSteps />
+      <Pipeline />
+      <Pathways />
       <StatementBand>{site.tagline}</StatementBand>
       <ClosingCTA />
     </>

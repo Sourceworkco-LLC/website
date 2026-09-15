@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Sora, Inter } from "next/font/google";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
-import { site } from "@/content/site";
+import { registration, site } from "@/content/site";
 import "./globals.css";
 
 const sora = Sora({
@@ -45,8 +45,9 @@ export const metadata: Metadata = {
 };
 
 /**
- * Organization schema. Deliberately contains no telephone property: the site
- * publishes no phone number anywhere, including in structured data.
+ * Organization schema. Carries the federal identifiers, and deliberately no
+ * telephone property: no phone number is published anywhere on this site,
+ * structured data included. Set `site.phone` if that ever changes.
  */
 const organizationSchema = {
   "@context": "https://schema.org",
@@ -58,6 +59,18 @@ const organizationSchema = {
   slogan: site.tagline,
   description: site.description,
   logo: `${site.url}/brand/lockup-horizontal-obsidian.svg`,
+  identifier: [
+    {
+      "@type": "PropertyValue",
+      name: "UEI",
+      value: registration.uei,
+    },
+    {
+      "@type": "PropertyValue",
+      name: "CAGE",
+      value: registration.cage,
+    },
+  ],
   address: {
     "@type": "PostalAddress",
     addressLocality: "Nashville",

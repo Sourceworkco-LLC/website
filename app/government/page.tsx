@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import { PageHero } from "@/components/PageHero";
 import { Section, SectionLabel } from "@/components/Section";
-import { SnapshotTable } from "@/components/SnapshotTable";
+import { CredentialCard } from "@/components/CredentialCard";
+import { QuickReference } from "@/components/QuickReference";
 import { ClosingCTA } from "@/components/ClosingCTA";
-import { vehicles, site } from "@/content/site";
+import { cta, engagement, registration, vehicles, site } from "@/content/site";
 
-const description =
-  "Sourcework LLC company snapshot, registrations, capability statement, and how to engage on RFQs, RFPs, simplified acquisitions, and subcontracting.";
+const description = `Sourcework LLC is an active SAM.gov registered small business. UEI ${registration.uei}, CAGE ${registration.cage}, Nashville, Tennessee, nationwide service. Capability statement, codes, and how to submit an RFQ.`;
 
 export const metadata: Metadata = {
   title: "Government",
@@ -20,38 +20,44 @@ export default function GovernmentPage() {
     <>
       <PageHero
         label="Government"
-        title="Company snapshot."
-        intro="The registration detail a contracting officer needs before a solicitation goes out, in one place."
+        title="Registered, and ready to quote."
+        intro="Everything a contracting officer needs to verify Sourcework and issue a requirement, on one page."
       />
 
-      <Section label="Registrations">
+      <Section label="Registration">
+        <CredentialCard />
+      </Section>
+
+      <Section className="border-t rule" label="Quick reference">
         <div className="grid gap-12 md:grid-cols-12 md:gap-16">
-          <div className="md:col-span-8">
-            <SectionLabel>Registrations</SectionLabel>
-            <div className="mt-8">
-              <SnapshotTable />
-            </div>
+          <div className="md:col-span-4">
+            <SectionLabel>Quick reference</SectionLabel>
+            <h2 className="heading mt-6 text-[clamp(1.5rem,3vw,2.25rem)]">
+              Company data.
+            </h2>
+            <p className="measure mt-6 text-obsidian/80">
+              Verified against the SAM.gov record. Items marked not yet published
+              are exactly that: they are not listed here until they are issued.
+            </p>
+            <p className="measure mt-6 text-sm text-obsidian/70">
+              Sourcework holds no socioeconomic certifications, no contract
+              vehicles, and no federal past performance to date. Registration is
+              for all awards.
+            </p>
+            <p className="measure mt-6 text-sm text-obsidian/70">
+              Requirements are acknowledged the same business day, with a direct
+              answer on whether we are quoting and what we need to price it.
+            </p>
           </div>
 
-          <div className="md:col-span-4">
-            <SectionLabel>Capability Statement</SectionLabel>
-            <p className="mt-6 text-obsidian/80">
-              A one-page capability statement covering core competencies,
-              differentiators, past performance, and company data.
-            </p>
-            <a
-              href="/capability-statement.pdf"
-              className="label mt-8 inline-flex min-h-12 items-center bg-obsidian px-8 py-4 text-bone transition-colors duration-200 hover:bg-evergreen"
-              download
-            >
-              Download PDF
-            </a>
+          <div className="md:col-span-8">
+            <QuickReference />
           </div>
         </div>
       </Section>
 
       <Section className="bg-evergreen text-bone" label="How to engage">
-        <SectionLabel tone="dark">How To Engage</SectionLabel>
+        <SectionLabel tone="dark">How to engage</SectionLabel>
         <h2 className="heading mt-6 max-w-3xl text-[clamp(1.875rem,4.5vw,3rem)]">
           Contract vehicles and inquiries.
         </h2>
@@ -60,30 +66,40 @@ export default function GovernmentPage() {
           {vehicles.map((vehicle) => (
             <div
               key={vehicle.title}
-              className="border-b rule-on-dark py-8 sm:even:border-l sm:even:pl-8 sm:odd:pr-8"
+              className="border-b rule-on-dark py-8 sm:odd:pr-8 sm:even:border-l sm:even:pl-8"
             >
               <h3 className="heading text-xl">{vehicle.title}</h3>
               <p className="mt-4 text-sm text-bone/75">{vehicle.body}</p>
             </div>
           ))}
         </div>
+      </Section>
 
-        <p className="mt-12 text-bone/75">
-          Send solicitations, line items, and teaming inquiries to{" "}
-          <a
-            href={`mailto:${site.email}`}
-            className="underline underline-offset-4 transition-colors hover:text-bone"
-          >
-            {site.email}
-          </a>
-          .
-        </p>
+      <Section className="border-t rule" label="From solicitation to closeout">
+        <SectionLabel>From solicitation to closeout</SectionLabel>
+        <h2 className="heading mt-6 max-w-3xl text-[clamp(1.875rem,4.5vw,3rem)]">
+          How we work with agencies.
+        </h2>
+
+        <div className="mt-16 grid gap-px border-t rule sm:grid-cols-2 lg:grid-cols-5">
+          {engagement.map((stage, index) => (
+            <div
+              key={stage.title}
+              className={`border-b rule py-8 lg:border-b-0 lg:py-10 ${
+                index < engagement.length - 1 ? "lg:border-r lg:pr-6" : ""
+              } ${index > 0 ? "lg:pl-6" : ""}`}
+            >
+              <h3 className="heading text-lg">{stage.title}</h3>
+              <p className="mt-4 text-sm text-obsidian/75">{stage.body}</p>
+            </div>
+          ))}
+        </div>
       </Section>
 
       <ClosingCTA
         heading="Have a requirement out for quote?"
-        body="Send the solicitation number or the line items. You will get a direct answer on fit, timeline, and pricing approach."
-        action="Send a requirement"
+        body="Send the solicitation number or the line items. You will get a direct answer on fit, timeline, and pricing approach, and a clear no if we are not the right party."
+        primary={cta.rfq}
       />
     </>
   );

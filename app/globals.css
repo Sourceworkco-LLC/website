@@ -12,6 +12,9 @@
      which fails AA, so small muted text on light surfaces uses this. */
   --color-stone-ink: #6e6a62;
   --color-bone: #f4f2ec; /* light backgrounds, and all text on dark */
+  /* The one signal color on the site: SAM.gov registration status. Used on
+     the status square and its label, nowhere else. 5.5:1 on Bone. */
+  --color-active: #3e6b4a;
 
   --font-display: var(--font-sora), ui-sans-serif, system-ui, sans-serif;
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
@@ -100,6 +103,16 @@ body {
 
 .measure-wide {
   max-width: 75ch;
+}
+
+/* Registration codes. Tracked and tabular so a contracting officer can read
+   a character at a time and transcribe without ambiguity. */
+.code {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.12em;
+  line-height: 1.1;
 }
 
 /* ---------------------------------------------------------------------------

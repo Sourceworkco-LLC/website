@@ -14,20 +14,57 @@ npm run verify     # typecheck, lint, production build
 
 Node 20 or newer.
 
+## Pages
+
+| Route | Job |
+| --- | --- |
+| `/` | Positioning, registration proof above the fold, capabilities, pipeline, three audience paths |
+| `/solutions` | The four capabilities in depth, plus how we work with agencies |
+| `/government` | Credential panel, full contracting officer quick reference, contract vehicles |
+| `/rfq` | Requirement and RFQ intake, with document upload. The primary conversion path |
+| `/suppliers` | Supplier registration, and how we buy |
+| `/teaming` | Where Sourcework contributes on a prime's scope, and a teaming inquiry |
+| `/about` | What the company is, stated without overclaiming |
+| `/contact` | General contact, routed to the three specific intakes |
+
 ## Editing content
 
 There is no CMS. Everything a non-developer edits lives in **`content/site.ts`**
-as typed constants: navigation, the four capabilities, the Align/Source/
-Implement/Deliver sequence, the agency engagement stages, the federal
-registration snapshot, and the contract vehicles. Page components read from that
-file and never hardcode copy.
+(copy and structured content) and **`content/forms.ts`** (form fields). Page
+components read from those files and never hardcode copy.
 
-The registration values on `/government` ship as placeholders. Replace `To be
-provided` in the `snapshot` array as UEI, CAGE, NAICS, and PSC codes are issued.
+Two standing rules govern `content/site.ts`, and they are written at the top of
+the file:
 
-**Hard rule:** no telephone number appears anywhere on this site. Not on the
-contact page, not in the footer, not in the Organization JSON-LD, not in
-metadata. Email and location only.
+1. Nothing may claim a capability, relationship, certification, award, or past
+   performance Sourcework has not established.
+2. Company data is never invented. Anything not yet issued is marked `pending`
+   and renders as a visible placeholder, so a contracting officer sees an honest
+   gap rather than a plausible-looking value. NAICS and PSC codes are the open
+   items today.
+
+### Registration
+
+`registration` in `content/site.ts` holds the verified SAM.gov record: UEI
+`Z7AZH895XD63`, CAGE `24SS2`, active for all awards, expiring 28 August 2027.
+Update `expires` at renewal. It feeds the credential panel, the quick
+reference, the home page strip, the footer, the Organization JSON-LD
+identifiers, and the page metadata.
+
+### Phone number
+
+No telephone number is published anywhere on this site: not on a page, not in
+the footer, not in the JSON-LD. That was set as a hard rule at the start of the
+project and no number has been supplied since. `site.phone` is `null`; set it to
+a string and the quick reference row, the contact page, and the schema pick it
+up. Leave it null and every surface omits it rather than inventing one.
+
+### Capability statement
+
+`public/capability-statement.pdf` is generated from the registered facts by
+`node scripts/make-capability-statement.mjs`, so the document a contracting
+officer downloads cannot contradict the site. Edit the `DATA` block in that
+script and re-run it, or drop a designed PDF at the same path to replace it.
 
 ## Brand system
 
@@ -84,15 +121,25 @@ inside the palette.
 Exactly one orchestrated reveal, on the home hero, on load. Nothing else on the
 site animates without user action, and `prefers-reduced-motion` disables it.
 
-## Contact form
+## Forms and intake
 
-`components/ContactForm.tsx` posts to `app/api/contact/route.ts`, which delivers
-through Resend to `ryan@sourceworkco.com`.
+All four forms (requirement, supplier, teaming, contact) are described in
+`content/forms.ts` and rendered by one component, `components/forms/IntakeForm.tsx`.
+Adding a field is a one-line edit; every form then validates, submits, and fails
+identically. They post multipart form data to `app/api/intake/route.ts`, which
+delivers by email through Resend.
 
+- Attachments ride along with the submission: solicitations, SOWs, drawings,
+  line cards. Capped at 5 files and 4 MB total, because Vercel caps a serverless
+  request body at 4.5 MB. The form states the limit and points larger packages
+  at email.
+- A submission is accepted when it carries a valid email address plus either a
+  description or an attached document. Nothing else is mandatory, so a buyer
+  forwarding a solicitation at 4:55pm is not stopped by a form.
 - With no `RESEND_API_KEY`, the route answers `{ ok: false, reason: "unconfigured" }`
   and the form offers a `mailto:` compose window pre-filled with what was typed.
-- A hidden `website` honeypot field silently accepts and discards bot traffic.
-- Delivery failures log the full message body so nothing is lost.
+- A hidden `fax` honeypot field silently accepts and discards bot traffic.
+- Delivery failures log the whole submission so nothing is lost.
 
 Environment variables (see `.env.example`, all server side):
 
@@ -132,9 +179,11 @@ only.
 
 ## Before launch
 
-- [ ] Replace the `To be provided` rows in `content/site.ts`
-- [ ] Replace `public/capability-statement.pdf` with the designed statement
-      (`node scripts/make-placeholder-pdf.mjs` regenerates the placeholder)
+- [ ] Publish primary NAICS, additional NAICS, and PSC codes in `content/site.ts`
+      (the only `pending` rows left in the quick reference)
+- [ ] Decide on a published phone number, or leave `site.phone` null
+- [ ] Replace `public/capability-statement.pdf` with a designed statement, or
+      keep the generated one (`node scripts/make-capability-statement.mjs`)
 - [ ] Add real photography and pass `src` to `<DuotoneImage>` on `/about`
 - [ ] Verify the Resend sender domain and send a live test through `/contact`
 - [ ] Submit `https://sourceworkco.com/sitemap.xml` to Google Search Console
@@ -142,9 +191,11 @@ only.
 ## Structure
 
 ```
-app/            routes, api/contact, sitemap, robots, icons, og image
-components/     header, footer, page sections, form, primitives
-content/site.ts all site copy and structured content
-public/brand/   mark and lockup SVGs
-scripts/        placeholder PDF generator
+app/              routes, api/intake, sitemap, robots, icons, og image
+components/       header, footer, page sections, primitives
+components/forms/ the one schema-driven intake form
+content/site.ts   all site copy and structured content
+content/forms.ts  form field schemas
+public/brand/     mark and lockup SVGs
+scripts/          capability statement generator
 ```

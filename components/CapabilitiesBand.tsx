@@ -16,12 +16,13 @@ export function CapabilitiesBand() {
             {capabilities.map((capability) => (
               <div
                 key={capability.slug}
-                className="border-b rule-on-dark py-8 lg:border-b-0 lg:border-r lg:py-10 lg:pr-8 lg:last:border-r-0 lg:not-first:pl-8"
+                className="flex flex-col border-b rule-on-dark py-8 lg:border-b-0 lg:border-r lg:py-10 lg:pr-8 lg:last:border-r-0 lg:not-first:pl-8"
               >
                 <h2 className="heading text-xl">{capability.title}</h2>
-                <ul className="mt-6 space-y-2">
+                <p className="mt-4 text-sm text-bone/75">{capability.lede}</p>
+                <ul className="mt-6 space-y-2 border-t rule-on-dark pt-6 lg:mt-auto">
                   {capability.items.map((item) => (
-                    <li key={item} className="text-sm text-bone/75">
+                    <li key={item} className="label text-bone/70">
                       {item}
                     </li>
                   ))}
