@@ -4,6 +4,20 @@ Marketing site for **Sourcework LLC**, a Tennessee government contracting and
 procurement company. Next.js App Router, TypeScript, Tailwind CSS 4, static
 first, deployed on Vercel.
 
+## First push
+
+This repository already has its history. To put it on GitHub:
+
+```bash
+tar -xzf sourcework-site.tar.gz
+cd sourcework-site
+
+# Create an empty repo first (no README, no .gitignore, no license), then:
+git remote add origin https://github.com/<owner>/<repo>.git
+git branch -M main
+git push -u origin main
+```
+
 ## Run
 
 ```bash
@@ -12,7 +26,30 @@ npm run dev        # http://localhost:3000
 npm run verify     # typecheck, lint, production build
 ```
 
-Node 20 or newer.
+Node 20 or newer. `npm run verify` is the gate: a change is not done until it
+passes.
+
+## Photography
+
+Eight slots are defined in `config/images.ts` and rendered by
+`components/Photo.tsx`, which falls back to a composed placeholder when a file
+is missing. Two ways to fill them:
+
+```bash
+# Either drop correctly named files straight into public/images/
+#   hero-port-dusk.jpg, capability-products.jpg, capability-technology.jpg,
+#   capability-logistics.jpg, capability-facilities.jpg,
+#   capability-specialty.jpg, break-terminal.jpg, about-quarry.jpg
+
+# Or let the script size and convert them for you:
+node scripts/prepare-photo.mjs ~/Downloads/port-at-dusk.jpg heroPort
+node scripts/prepare-photo.mjs ~/Downloads/data-center.jpg technology
+```
+
+Slot keys: `heroPort`, `products`, `technology`, `logistics`, `facilities`,
+`specialty`, `breakTerminal`, `aboutQuarry`. The script auto-rotates, resizes
+(2600px for full-bleed, 1800px for cards), strips camera metadata, and writes
+a progressive mozjpeg. Next/Image derives AVIF and WebP from there.
 
 ## Pages
 
