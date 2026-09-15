@@ -4,6 +4,11 @@ import { Mark } from "./Mark";
 /**
  * Horizontal lockup: mark plus the tracked SOURCEWORK wordmark.
  *
+ * Set in Sora 500 at 0.18em tracking: lighter and more open than the
+ * headline weight, so the word sits level with the icon's thin counters
+ * rather than out-weighing them, and it matches the tracked-uppercase system
+ * used for every label on the site.
+ *
  * Rendered as live type rather than a flat image so the wordmark stays sharp
  * at every size and reads to screen readers and search engines. The equivalent
  * flat assets are /public/brand/lockup-horizontal-{obsidian,bone}.svg, kept in
@@ -24,7 +29,7 @@ export function Lockup({
     <span className={`inline-flex items-center gap-3 ${className}`}>
       <Mark className={markClassName} />
       <span
-        className={`font-[family-name:var(--font-display)] font-semibold uppercase leading-none tracking-[0.1em] ${wordClassName}`}
+        className={`font-[family-name:var(--font-display)] font-medium uppercase leading-none tracking-[0.18em] ${wordClassName}`}
       >
         Sourcework
       </span>

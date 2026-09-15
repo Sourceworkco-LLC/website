@@ -62,7 +62,7 @@ export default async function OpengraphImage() {
             style={{
               marginTop: 32,
               fontSize: 26,
-              letterSpacing: "0.1em",
+              letterSpacing: "0.18em",
               textTransform: "uppercase",
               color: "#A7A299",
             }}

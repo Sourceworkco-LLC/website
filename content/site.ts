@@ -24,11 +24,10 @@ export const site = {
   location: "Nashville, TN",
   serviceArea: "Nationwide",
   /**
-   * No telephone number is published on this site. That was set as a hard rule
-   * at the start of the project and no number has been supplied since. Set a
-   * string here and it appears in the government quick reference, on /contact,
-   * and in the Organization schema. Leave it null and every one of those
-   * surfaces omits the row instead of inventing a number.
+   * No telephone number is published on this site. Confirmed decision: email
+   * only. The wiring stays in place so it is a one-line change later. Set a
+   * string here and the row appears in the government quick reference, on
+   * /contact, and in the Organization schema. Null omits it everywhere.
    */
   phone: null as string | null,
   /** Named signatory. A quote from an unnamed company is a quote nobody owns. */
