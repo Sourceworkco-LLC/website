@@ -21,36 +21,37 @@ const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 // outside the TypeScript build.
 const DATA = {
   legalName: "SOURCEWORK LLC",
-  tagline: "COMPLEX REQUIREMENTS. REAL OUTCOMES.",
-  promise: "From Requirement to Result.",
+  tagline: "THE WORK BEHIND THE WORK.",
+  promise: "Capability already exists. We find it and put it to work.",
   summary:
-    "Sourcework is a procurement and execution company. A customer issues a requirement; we determine the commercial path to fill it, qualify the sources, submit a compliant quote, and carry the work through delivery under one contract and one point of accountability.",
+    "A customer issues a requirement. We find the commercial capability to fill it, qualify the sources, submit a compliant quote, and carry the work through delivery under one contract and one point of accountability.",
   company: [
     ["UEI", "Z7AZH895XD63"],
     ["CAGE Code", "24SS2"],
     ["SAM.gov Registration", "Active, All Awards, expires 28 August 2027"],
     ["Business Type", "Small Business"],
-    ["State of Registration", "Tennessee"],
-    ["Headquarters", "Nashville, Tennessee"],
+    ["Headquarters", "Nashville, Tennessee (state of registration: Tennessee)"],
     ["Service Area", "Nationwide"],
     ["NAICS / PSC Codes", "Not yet published"],
   ],
   capabilities: [
-    ["Government Procurement", "Products, equipment, technology, and services sourced, quoted, and delivered as one accountable party."],
-    ["Technology & Digital Solutions", "Software, licensing, automation, AI-enabled workflow, and implementation support."],
-    ["Specialized Services", "Facilities, logistics, field operations, and support services through qualified providers."],
-    ["Supplier Sourcing", "Manufacturers, distributors, subcontractors, and specialty providers qualified per requirement."],
+    ["Products & Equipment", "Commercial products, industrial materials, and specialized equipment sourced to specification."],
+    ["Technology & Digital", "Software, licensing, automation, AI-enabled workflow, implementation, and integration."],
+    ["Logistics", "Freight, transportation, and delivery coordination to the site and the schedule."],
+    ["Facilities & Field Services", "Facility support, field operations, and sustainment through qualified commercial providers."],
+    ["Specialty Sourcing", "Obsolete, single-source, long lead time, and short-notice requirements."],
+    ["Supplier Coordination", "One purchase order for the customer; manufacturers, distributors, and carriers managed by us."],
   ],
   pipeline: [
-    ["Requirement", "Solicitation, SOW, or line items read against what is being bought."],
-    ["Source", "Commercial path set: manufacturer, distributor, subcontractor, or provider."],
+    ["Define", "Solicitation, SOW, or line items read against what is being bought."],
+    ["Source", "The capability found: manufacturer, distributor, subcontractor, carrier, specialist."],
     ["Validate", "Capacity, lead time, authorization to sell, and compliance confirmed."],
     ["Quote", "Priced for the acquisition method, with required reps and formatting."],
     ["Execute", "Purchase orders, schedule, documentation, and coordination managed."],
     ["Deliver", "Documented, invoiced through the required system, supported to closeout."],
   ],
   standing:
-    "Sourcework LLC is newly registered and claims no federal past performance, contract vehicles, or socioeconomic certifications to date. What we offer is requirement analysis, commercial sourcing, disciplined quoting, and accountability through delivery.",
+    "Sourcework LLC is newly registered and claims no federal past performance, contract vehicles, or socioeconomic certifications to date. What we offer is sourcing, disciplined quoting, and accountability through delivery.",
   contact: [
     ["Point of Contact", "Ryan Boggs, Founder"],
     ["Email", "ryan@sourceworkco.com"],
@@ -160,9 +161,9 @@ rule();
 sectionHeading("Core capabilities");
 for (const [title, body] of DATA.capabilities) {
   ops.push(`BT /F2 10 Tf ${PAGE.margin} ${y} Td (${esc(title)}) Tj ET`);
-  y -= 12;
+  y -= 11;
   paragraph(body, { size: 9, leading: 11.5 });
-  y -= 4;
+  y -= 2;
 }
 
 rule();
@@ -176,7 +177,7 @@ DATA.pipeline.forEach(([title, body], index) => {
   lines.forEach((line, lineIndex) => {
     ops.push(`BT /F1 9 Tf ${PAGE.margin + 130} ${y - lineIndex * 11} Td (${esc(line)}) Tj ET`);
   });
-  y -= Math.max(1, lines.length) * 11 + 4;
+  y -= Math.max(1, lines.length) * 11 + 2;
 });
 
 rule();

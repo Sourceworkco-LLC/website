@@ -55,8 +55,8 @@ export default async function OpengraphImage() {
         <img src={mark} alt="" width={128} height={120} />
 
         <div style={{ display: "flex", flexDirection: "column" }}>
-          <div style={{ fontSize: 76, letterSpacing: "-0.02em", lineHeight: 1.05 }}>
-            {site.promise}
+          <div style={{ fontSize: 72, letterSpacing: "-0.02em", lineHeight: 1.05, maxWidth: 900 }}>
+            {site.brandLine}
           </div>
           <div
             style={{

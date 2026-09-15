@@ -95,6 +95,36 @@ export const requirementForm: FormGroup[] = [
   },
 ];
 
+/**
+ * Home page intake. The shortest path that still produces an actionable
+ * submission: what needs doing, a document if there is one, and a reply
+ * address. Solicitation detail lives on /rfq.
+ */
+export const requirementFormShort: FormGroup[] = [
+  {
+    legend: "Send it over",
+    fields: [
+      {
+        name: "requirement",
+        label: "What needs to get done",
+        type: "textarea",
+        rows: 4,
+        help: "Line items, a scope, a solicitation number, or a sentence.",
+      },
+      {
+        name: "files",
+        label: "Attach the solicitation, RFQ, SOW or specs",
+        type: "file",
+        multiple: true,
+        accept: uploadLimit.accept,
+        help: uploadLimit.help,
+      },
+      { name: "name", label: "Name", type: "text", required: true, half: true, autoComplete: "name" },
+      { name: "email", label: "Email", type: "email", required: true, half: true, autoComplete: "email" },
+    ],
+  },
+];
+
 /** Supplier and manufacturer registration. */
 export const supplierForm: FormGroup[] = [
   {

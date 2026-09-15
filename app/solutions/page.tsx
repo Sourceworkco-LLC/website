@@ -1,84 +1,76 @@
 import type { Metadata } from "next";
 import { PageHero } from "@/components/PageHero";
-import { Section, SectionLabel } from "@/components/Section";
-import { Pipeline } from "@/components/Pipeline";
-import { StatementBand } from "@/components/StatementBand";
+import { Photo } from "@/components/Photo";
+import { Container } from "@/components/Container";
+import { ImageBreak } from "@/components/ImageBreak";
 import { ClosingCTA } from "@/components/ClosingCTA";
-import { capabilities, engagement, site } from "@/content/site";
+import { capabilities, site } from "@/content/site";
 
 const description =
-  "Government procurement, technology and digital solutions, specialized services, and supplier sourcing, delivered under single-point accountability.";
+  "What Sourcework sources and coordinates: products and equipment, technology and digital, logistics, facilities and field services, specialty sourcing, and supplier coordination.";
 
 export const metadata: Metadata = {
-  title: "Solutions",
+  title: "Capabilities",
   description,
   alternates: { canonical: "/solutions" },
-  openGraph: { title: `Solutions | ${site.name}`, description, url: "/solutions" },
+  openGraph: { title: `Capabilities | ${site.name}`, description, url: "/solutions" },
 };
 
 export default function SolutionsPage() {
   return (
     <>
       <PageHero
-        label="Solutions"
-        title="Four capabilities, one accountable party."
-        intro="Sourcework holds the contract and the coordination. You issue one requirement, manage one point of contact, and evaluate one performance record."
+        label="Capabilities"
+        title="Capability, sourced."
+        intro="Six ways we put existing commercial capability to work. One contract on your side, however many moving parts on ours."
       />
 
-      <Section label="Capabilities">
-        <div className="border-t rule">
-          {capabilities.map((capability) => (
-            <article
-              key={capability.slug}
-              className="grid gap-6 border-b rule py-12 md:grid-cols-12 md:gap-10 md:py-16"
-            >
-              <div className="md:col-span-4">
-                <h2 className="heading text-[clamp(1.5rem,3vw,2.25rem)]">
-                  {capability.title}
-                </h2>
-                <ul className="mt-6 space-y-1">
-                  {capability.items.map((item) => (
-                    <li key={item} className="label text-stone-ink">
-                      {item}
-                    </li>
-                  ))}
-                </ul>
+      <div className="bg-bone">
+        {capabilities.map((capability, index) => (
+          <section
+            key={capability.slug}
+            id={capability.slug}
+            className="scroll-mt-24 border-b rule py-16 md:py-20"
+            aria-label={capability.title}
+          >
+            <Container>
+              <div className="grid items-center gap-10 lg:grid-cols-12 lg:gap-16">
+                <div
+                  className={`lg:col-span-5 ${index % 2 === 1 ? "lg:order-2 lg:col-start-8" : ""}`}
+                >
+                  <Photo
+                    slot={capability.image}
+                    sizes="(min-width: 1024px) 40vw, 100vw"
+                    className="aspect-16/10 w-full"
+                  />
+                </div>
+
+                <div
+                  className={`lg:col-span-6 ${index % 2 === 1 ? "lg:order-1 lg:col-start-1" : "lg:col-start-7"}`}
+                >
+                  <h2 className="heading text-[clamp(1.75rem,3.5vw,2.5rem)]">
+                    {capability.title}
+                  </h2>
+                  <p className="measure mt-5 text-lg text-obsidian/85">
+                    {capability.blurb}
+                  </p>
+                  <p className="measure mt-5 text-obsidian/75">{capability.detail}</p>
+                  <ul className="mt-8 flex flex-wrap gap-x-6 gap-y-2 border-t rule pt-5">
+                    {capability.items.map((item) => (
+                      <li key={item} className="label text-stone-ink">
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
-              <div className="md:col-span-8">
-                <p className="heading text-xl text-obsidian">{capability.lede}</p>
-                <p className="measure-wide mt-5 text-lg text-obsidian/80">
-                  {capability.summary}
-                </p>
-              </div>
-            </article>
-          ))}
-        </div>
-      </Section>
+            </Container>
+          </section>
+        ))}
+      </div>
 
-      <Pipeline />
+      <ImageBreak slot="facilities" statement="Capability already exists. We find it and put it to work." />
 
-      <Section className="bg-bone border-t rule" label="How we work with agencies">
-        <SectionLabel>How we work with agencies</SectionLabel>
-        <h2 className="heading mt-6 max-w-3xl text-[clamp(1.875rem,4.5vw,3rem)]">
-          From solicitation to closeout.
-        </h2>
-
-        <div className="mt-16 grid gap-px border-t rule sm:grid-cols-2 lg:grid-cols-5">
-          {engagement.map((stage, index) => (
-            <div
-              key={stage.title}
-              className={`border-b rule py-8 lg:border-b-0 lg:py-10 ${
-                index < engagement.length - 1 ? "lg:border-r lg:pr-6" : ""
-              } ${index > 0 ? "lg:pl-6" : ""}`}
-            >
-              <h3 className="heading text-lg">{stage.title}</h3>
-              <p className="mt-4 text-sm text-obsidian/75">{stage.body}</p>
-            </div>
-          ))}
-        </div>
-      </Section>
-
-      <StatementBand>{site.tagline}</StatementBand>
       <ClosingCTA />
     </>
   );

@@ -13,7 +13,8 @@ export function Footer() {
         <div className="grid gap-12 py-16 md:grid-cols-12 md:py-20">
           <div className="md:col-span-5">
             <Lockup href={null} className="text-bone" />
-            <p className="label mt-8 text-bone/70">{site.tagline}</p>
+            <p className="heading mt-8 text-xl text-bone">{site.brandLine}</p>
+            <p className="label mt-3 text-bone/60">{site.tagline}</p>
 
             <dl className="mt-10 space-y-2 text-sm text-bone/75">
               <div className="flex gap-3">

@@ -22,7 +22,7 @@ export default function RfqPage() {
       <PageHero
         label="Requirement intake"
         title="Send us the solicitation."
-        intro="Paste the scope or attach the documents. That is the whole requirement: everything else on this page is optional, and we take the analysis from there."
+        intro="Paste the scope or attach the documents. Everything else on this page is optional."
       />
 
       <Section label="Requirement intake">
@@ -33,7 +33,7 @@ export default function RfqPage() {
               groups={requirementForm}
               submitLabel="Send requirement"
               successTitle="Requirement received."
-              successBody="You will get a reply from ryan@sourceworkco.com confirming whether we are quoting it, what we need to price it, and by when."
+              successBody="You will get a reply from ryan@sourceworkco.com confirming whether we are quoting it and what we need to price it."
             />
           </div>
 
@@ -43,23 +43,19 @@ export default function RfqPage() {
               <li>
                 <p className="label text-stone-ink">Same business day</p>
                 <p className="mt-2 text-sm text-obsidian/80">
-                  Acknowledgement that the requirement arrived, with anything we
-                  need clarified to price it.
+                  Confirmation it arrived, plus anything we need clarified.
                 </p>
               </li>
               <li>
                 <p className="label text-stone-ink">Fit, stated plainly</p>
                 <p className="mt-2 text-sm text-obsidian/80">
-                  If we are not the right party for the requirement, we say so
-                  rather than submitting a quote that wastes an evaluation.
+                  Including no. A wasted evaluation helps nobody.
                 </p>
               </li>
               <li>
                 <p className="label text-stone-ink">Quote</p>
                 <p className="mt-2 text-sm text-obsidian/80">
-                  Priced for the acquisition method, with the representations and
-                  formatting the instructions require, submitted before the
-                  deadline.
+                  Priced for the buying method, complete, before the deadline.
                 </p>
               </li>
             </ol>

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Sora, Inter } from "next/font/google";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { StickyCTA } from "@/components/StickyCTA";
 import { registration, site } from "@/content/site";
 import "./globals.css";
 
@@ -22,7 +23,7 @@ const inter = Inter({
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: `${site.name} | ${site.tagline}`,
+    default: `${site.name} | ${site.brandLine}`,
     template: `%s | ${site.name}`,
   },
   description: site.description,
@@ -33,12 +34,12 @@ export const metadata: Metadata = {
     siteName: site.name,
     locale: "en_US",
     url: site.url,
-    title: `${site.name} | ${site.tagline}`,
+    title: `${site.name} | ${site.brandLine}`,
     description: site.description,
   },
   twitter: {
     card: "summary_large_image",
-    title: `${site.name} | ${site.tagline}`,
+    title: `${site.name} | ${site.brandLine}`,
     description: site.description,
   },
   robots: { index: true, follow: true },
@@ -56,7 +57,7 @@ const organizationSchema = {
   alternateName: site.name,
   url: site.url,
   email: site.email,
-  slogan: site.tagline,
+  slogan: site.brandLine,
   description: site.description,
   logo: `${site.url}/brand/lockup-horizontal-obsidian.svg`,
   identifier: [
@@ -103,6 +104,9 @@ export default function RootLayout({
         <Header />
         <main id="main">{children}</main>
         <Footer />
+        <StickyCTA />
+        {/* Clears the phone-only sticky action so it never covers the footer. */}
+        <div aria-hidden="true" className="h-20 bg-evergreen lg:hidden" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}

@@ -21,7 +21,7 @@ export default function TeamingPage() {
       <PageHero
         label="Teaming"
         title="Discuss teaming."
-        intro="Sourcework works as a subcontractor and teaming partner on scope a prime already holds, handling the commercial sourcing and fulfillment side of a requirement."
+        intro="We work as a subcontractor on scope you already hold, carrying the commercial sourcing and fulfillment side of it."
       />
 
       <Section label="Where Sourcework contributes">
@@ -53,10 +53,9 @@ export default function TeamingPage() {
 
             <div className="mt-10 space-y-4 border-t rule pt-6 text-sm text-obsidian/75">
               <p className="measure">
-                Sourcework holds no socioeconomic certifications and claims no
-                past performance. What we bring to a team is sourcing,
-                requirement analysis, and execution on the commercial side of a
-                scope, under a subcontract you control.
+                No socioeconomic certifications, no past performance claimed.
+                What we bring is sourcing and execution on the commercial side,
+                under a subcontract you control.
               </p>
               <p className="measure">
                 We sign non-disclosure and teaming agreements before working a
@@ -64,9 +63,8 @@ export default function TeamingPage() {
                 sources independently on a scope we are teamed on.
               </p>
               <p className="measure">
-                Inquiries are acknowledged the same business day. If a deadline
-                is inside 72 hours, say so in the message and it moves to the
-                front.
+                Acknowledged the same business day. If the deadline is inside 72
+                hours, say so and it moves to the front.
               </p>
             </div>
           </div>

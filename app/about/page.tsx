@@ -1,13 +1,12 @@
 import type { Metadata } from "next";
 import { PageHero } from "@/components/PageHero";
-import { Section, SectionLabel } from "@/components/Section";
-import { StatementBand } from "@/components/StatementBand";
+import { Container } from "@/components/Container";
+import { Photo } from "@/components/Photo";
 import { ClosingCTA } from "@/components/ClosingCTA";
-import { DuotoneImage } from "@/components/DuotoneImage";
 import { registration, values, site } from "@/content/site";
 
 const description =
-  "Sourcework operates as a procurement and execution layer between customer requirements and the fragmented commercial marketplace. Nashville, Tennessee.";
+  "Every finished job starts upstream. Sourcework finds the capability behind an outcome and puts it to work. Nashville, Tennessee.";
 
 export const metadata: Metadata = {
   title: "About",
@@ -21,78 +20,105 @@ export default function AboutPage() {
     <>
       <PageHero
         label="About"
-        title="Source. Work."
-        intro="A procurement and execution layer between customer requirements and the fragmented commercial marketplace."
+        title="The work behind the work."
+        intro="Every finished job starts somewhere upstream. Sourcework is what happens up there."
       />
 
-      <Section label="Company">
-        <div className="grid gap-12 md:grid-cols-12 md:gap-16">
-          <div className="md:col-span-7">
-            <SectionLabel>The name</SectionLabel>
-            <div className="measure mt-8 space-y-6 text-lg text-obsidian/85">
-              <p>
-                <strong className="font-semibold text-obsidian">Source:</strong> find
-                the right opportunity, supplier, product, and solution.
-              </p>
-              <p>
-                <strong className="font-semibold text-obsidian">Work:</strong> put
-                everything together and execute for the customer.
-              </p>
-              <p>
-                Requirements rarely fail on intent. They fail in the gap between
-                what an organization needs and the vendors, quotes,
-                certifications, and delivery schedules standing between that need
-                and a finished outcome. Sourcework closes that gap and carries
-                the accountability for it.
-              </p>
-              <p>
-                We are a Nashville company working across federal, state, and
-                local government, and with commercial clients who need technology
-                sourced, licensed, and implemented rather than merely purchased.
-              </p>
+      <section className="bg-bone py-16 md:py-24" aria-label="The idea">
+        <Container>
+          <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
+            <div className="lg:col-span-6">
+              <div className="measure space-y-6 text-lg text-obsidian/85">
+                <p>
+                  A facility needs work. A team needs technology. A project needs
+                  materials. An agency needs a problem solved.
+                </p>
+                <p>
+                  The capability to solve it almost always exists already. It is
+                  just scattered. The manufacturer is in one state. The
+                  distributor is in another. The specialist is somewhere else
+                  entirely. Freight is a separate company. Compliance is a
+                  separate constraint.
+                </p>
+                <p className="heading text-2xl text-obsidian">
+                  Someone has to find the right capability, assemble the
+                  commercial path, and make the outcome happen.
+                </p>
+                <p>That is the work behind the work. That is the company.</p>
+              </div>
             </div>
 
-            <div className="mt-12 border-t rule pt-8">
-              <SectionLabel>Where we are</SectionLabel>
-              <p className="measure mt-6 text-obsidian/80">
+            <div className="lg:col-span-5 lg:col-start-8">
+              <Photo
+                slot="aboutQuarry"
+                sizes="(min-width: 1024px) 40vw, 100vw"
+                className="aspect-4/5 w-full"
+              />
+            </div>
+          </div>
+        </Container>
+      </section>
+
+      <section className="bg-obsidian py-20 text-bone md:py-28" aria-label="The name">
+        <Container>
+          <p className="label text-bone/60">The name</p>
+          <div className="mt-12 grid gap-10 md:grid-cols-2">
+            <div className="border-t rule-on-dark pt-8">
+              <h2 className="display text-[clamp(2rem,5vw,3.5rem)]">Source</h2>
+              <p className="mt-6 text-lg text-bone/80">
+                Find the right capability. The product, the supplier, the
+                specialist, the solution.
+              </p>
+            </div>
+            <div className="border-t rule-on-dark pt-8">
+              <h2 className="display text-[clamp(2rem,5vw,3.5rem)]">Work</h2>
+              <p className="mt-6 text-lg text-bone/80">
+                Put it into action. Assemble it, coordinate it, deliver it,
+                stand behind it.
+              </p>
+            </div>
+          </div>
+          <p className="heading mt-16 max-w-3xl text-[clamp(1.5rem,3.5vw,2.5rem)]">
+            {site.belief}
+          </p>
+        </Container>
+      </section>
+
+      <section className="bg-bone py-20 md:py-28" aria-label="Where we are">
+        <Container>
+          <div className="grid gap-12 lg:grid-cols-12 lg:gap-16">
+            <div className="lg:col-span-5">
+              <p className="label text-stone-ink">Where we are</p>
+              <h2 className="heading mt-5 text-[clamp(1.75rem,3.5vw,2.5rem)]">
+                A Nashville company, early and honest about it.
+              </h2>
+            </div>
+            <div className="lg:col-span-6 lg:col-start-7">
+              <p className="measure text-obsidian/85">
                 Sourcework LLC is registered in Tennessee and active in SAM.gov
                 for all awards, UEI {registration.uei}, CAGE {registration.cage}.
-                We hold no socioeconomic certifications, no contract vehicles, and
-                no federal past performance to date. What we offer a buyer today
-                is requirement analysis, commercial sourcing, disciplined
-                quoting, and accountability through delivery. That is the whole
-                claim, and it is the one we intend to be measured on.
+                We hold no socioeconomic certifications, no contract vehicles,
+                and no federal past performance to date.
               </p>
+              <p className="measure mt-6 text-obsidian/85">
+                What we offer a buyer today is the ability to read a scope, find
+                who can actually fill it, verify that before promising anything,
+                and stay accountable through delivery. Government procurement is
+                where we work now. The idea is bigger than that.
+              </p>
+
+              <ul className="mt-10 flex flex-wrap gap-x-8 gap-y-3 border-t rule pt-6">
+                {values.map((value) => (
+                  <li key={value} className="label text-stone-ink">
+                    {value}
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
+        </Container>
+      </section>
 
-          <div className="md:col-span-5">
-            {/* Swap in real photography by passing `src`. */}
-            <DuotoneImage className="aspect-4/5 w-full" alt="" />
-          </div>
-        </div>
-      </Section>
-
-      <Section className="bg-evergreen text-bone" label="Values">
-        <SectionLabel tone="dark">Values</SectionLabel>
-        <ul className="mt-12 grid gap-px border-t rule-on-dark sm:grid-cols-2 lg:grid-cols-5">
-          {values.map((value, index) => (
-            <li
-              key={value}
-              className={`border-b rule-on-dark py-8 lg:border-b-0 lg:py-10 ${
-                index < values.length - 1 ? "lg:border-r lg:pr-6" : ""
-              } ${index > 0 ? "lg:pl-6" : ""}`}
-            >
-              <span className="heading text-xl">{value}</span>
-            </li>
-          ))}
-        </ul>
-        <p className="heading mt-16 max-w-2xl text-[clamp(1.5rem,3.5vw,2.5rem)]">
-          Same challenges. A more capable tomorrow.
-        </p>
-      </Section>
-
-      <StatementBand>{site.tagline}</StatementBand>
       <ClosingCTA />
     </>
   );

@@ -4,8 +4,8 @@ import { cta } from "@/content/site";
 
 /** Closing conversion block. A primary action and one alternative, no filler. */
 export function ClosingCTA({
-  heading = "Send us the solicitation.",
-  body = "Paste the scope or attach the documents. We will tell you quickly whether we are the right party for it, and what we would need to quote.",
+  heading = "Something to source, or something to solve?",
+  body = "Send it over. You get a straight answer on fit, and a quick one.",
   primary = cta.requirement,
   secondary = cta.capabilities,
 }: {

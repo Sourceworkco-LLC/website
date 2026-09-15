@@ -34,10 +34,13 @@ export const site = {
   /** Named signatory. A quote from an unnamed company is a quote nobody owns. */
   contactName: "Ryan Boggs",
   contactTitle: "Founder",
+  /** Primary brand line. The one thing to remember. */
+  brandLine: "The work behind the work.",
+  /** Secondary, and still true. Footer, collateral, campaigns. */
   tagline: "Complex Requirements. Real Outcomes.",
-  promise: "From Requirement to Result.",
+  belief: "Capability already exists. We find it and put it to work.",
   description:
-    "Sourcework is a procurement and execution company. Send a requirement and we determine the commercial path to fill it, then stay accountable from sourcing through delivery.",
+    "The equipment, people, technology and freight behind a finished job rarely come from one place. Sourcework finds the capability, builds the commercial path, and puts it to work.",
 } as const;
 
 export const nav = [
@@ -55,7 +58,9 @@ export const cta = {
   capabilities: { label: "Download capabilities", href: "/capability-statement.pdf" },
   supplier: { label: "Become a Sourcework supplier", href: "/suppliers" },
   teaming: { label: "Discuss teaming", href: "/teaming" },
-  reference: { label: "Government quick reference", href: "/government" },
+  reference: { label: "View government profile", href: "/government" },
+  explore: { label: "Explore capabilities", href: "/solutions" },
+  email: { label: "Email Sourcework", href: "mailto:ryan@sourceworkco.com" },
 } as const;
 
 /**
@@ -101,78 +106,83 @@ export const quickReference = [
   { label: "Point of contact", value: `${site.contactName}, ${site.contactTitle}` },
 ] as const;
 
-/** The four capability pillars. */
+/**
+ * What Sourcework sources and coordinates.
+ *
+ * `blurb` is the single sentence used on the home grid. `detail` and `items`
+ * belong to /solutions. Government procurement is the current primary market,
+ * but these categories are written to outlive it.
+ */
 export const capabilities = [
   {
-    slug: "government-procurement",
-    title: "Government Procurement",
-    items: ["Products", "Equipment", "Technology", "Services"],
-    lede: "One requirement, one accountable party.",
-    summary:
-      "You issue a requirement. We determine the commercial path to fill it and carry it end to end: sourcing, quoting, compliant submission, award management, delivery, and invoicing. The alternative is reconciling four vendors to close one line item, and that work lands on your desk rather than ours.",
+    slug: "products-and-equipment",
+    title: "Products & Equipment",
+    image: "products" as const,
+    blurb: "Commercial products, materials and specialized equipment, sourced to specification.",
+    items: ["Commercial products", "Industrial materials", "Specialized equipment", "Parts and consumables"],
+    detail:
+      "Most of what an agency or a contractor buys already exists somewhere. The work is finding the right version of it: the manufacturer who actually makes the part to spec, the distributor authorized to sell it, the lead time that fits the delivery date. We quote what we can deliver, and we say so when a specification and a schedule cannot both be met.",
   },
   {
-    slug: "technology-and-digital-solutions",
-    title: "Technology & Digital Solutions",
-    items: ["Software", "Licensing", "Automation", "AI & Workflow", "Implementation"],
-    lede: "Sourced and coordinated, not resold and abandoned.",
-    summary:
-      "We source and coordinate commercial technology: software and licensing, workflow automation, AI-enabled systems, and the implementation work that puts them into service. Scoped against the outcome rather than the license count, priced for the acquisition method in play, and accountable through deployment rather than closed out at purchase.",
+    slug: "technology-and-digital",
+    title: "Technology & Digital",
+    image: "technology" as const,
+    blurb: "Software, licensing, automation and the implementation that makes them usable.",
+    items: ["Software", "Licensing", "Automation", "AI-enabled workflow", "Implementation", "Integration"],
+    detail:
+      "Technology arrives as a license, a contract, and a configuration problem. We source the first two and coordinate the third, including the integration and training work that decides whether anyone actually uses it. Scoped to the outcome, priced for the buying method, accountable past the purchase order.",
   },
   {
-    slug: "specialized-services",
-    title: "Specialized Services",
-    items: ["Facilities", "Logistics", "Field Operations", "Support Services"],
-    lede: "Coordination is the deliverable.",
-    summary:
-      "Facilities, logistics, field operations, and sustainment requirements fulfilled through qualified commercial providers. We carry the coordination: scheduling, site access, compliance documentation, and reporting, so performance is verifiable against the statement of work instead of asserted after the fact.",
+    slug: "logistics",
+    title: "Logistics",
+    image: "logistics" as const,
+    blurb: "Freight, transportation and delivery coordination, to the site and the schedule.",
+    items: ["Freight", "Transportation", "Delivery coordination", "Site scheduling"],
+    detail:
+      "A product that arrives late is a product that failed. We arrange freight, transportation, and site delivery as part of the job rather than as an afterthought, and we coordinate access, scheduling, and documentation so receiving is not a surprise on either end.",
   },
   {
-    slug: "supplier-sourcing",
-    title: "Supplier Sourcing",
-    items: ["Manufacturers", "Distributors", "Subcontractors", "Specialty Providers"],
-    lede: "Qualified per requirement, not pulled off a list.",
-    summary:
-      "Sources are identified and qualified against the requirement in front of us: capability, capacity, lead time, authorization to sell the product, and compliance with the solicitation terms, all confirmed before a quote is submitted. Manufacturers, distributors, and service providers who want to be considered can register with us directly.",
+    slug: "facilities-and-field-services",
+    title: "Facilities & Field Services",
+    image: "facilities" as const,
+    blurb: "Qualified commercial providers for facility and field work, coordinated end to end.",
+    items: ["Facilities support", "Field operations", "Site services", "Sustainment"],
+    detail:
+      "Field and facility work lives or dies on coordination: who is on site, when, with what credentials, and who documents it. We identify qualified providers, carry the scheduling and compliance paperwork, and report performance against the scope of work.",
+  },
+  {
+    slug: "specialty-sourcing",
+    title: "Specialty Sourcing",
+    image: "specialty" as const,
+    blurb: "When the obvious source is not the right source.",
+    items: ["Obsolete and hard to find", "Long lead time", "Single source", "Short notice"],
+    detail:
+      "Obsolete parts. Single-source items. Something with a four-month lead time and a six-week deadline. These are the requests that go unanswered because they take real work to run down. They are the ones we want.",
+  },
+  {
+    slug: "supplier-coordination",
+    title: "Supplier Coordination",
+    image: "products" as const,
+    blurb: "One purchase order on your side. Many moving parts on ours.",
+    items: ["Manufacturers", "Distributors", "Subcontractors", "Carriers"],
+    detail:
+      "A single line item can touch a manufacturer, a distributor, a carrier, and a field crew. You should not have to manage four relationships to close one. We hold the purchase orders, the schedule, and the accountability, and you hold one contract with us.",
   },
 ] as const;
 
 /**
- * The pipeline. Genuinely sequential, so it is numbered and ordered. This is
- * the core idea of the company and it appears on the home page, on /solutions,
- * and in the requirement intake.
+ * How the work runs. Genuinely sequential, so it is numbered.
+ *
+ * Kept to one line each: the home page carries the concept, /government
+ * carries the detail. Do not grow these back into paragraphs.
  */
 export const pipeline = [
-  {
-    step: "01",
-    title: "Requirement",
-    body: "Send the solicitation, the SOW, or a line-item list. We read it the way the evaluator will and confirm what is actually being bought, including the terms that decide the award.",
-  },
-  {
-    step: "02",
-    title: "Source",
-    body: "We determine the commercial path: manufacturer, distributor, subcontractor, technology vendor, or specialty provider, sized to the requirement rather than to whoever is convenient.",
-  },
-  {
-    step: "03",
-    title: "Validate",
-    body: "Every source is checked before it reaches a quote. Capability, capacity, lead time, authorization to sell the product, and compliance with the solicitation terms.",
-  },
-  {
-    step: "04",
-    title: "Quote",
-    body: "Pricing structured for the acquisition method, with the representations, certifications, and formatting the instructions require. Submitted complete and on time, or not submitted.",
-  },
-  {
-    step: "05",
-    title: "Execute",
-    body: "On award we manage mobilization: purchase orders, schedules, documentation, and the coordination between every party on the delivery.",
-  },
-  {
-    step: "06",
-    title: "Deliver",
-    body: "Delivery documented against the line items, invoiced through the required system, supported through closeout. Accountability stays with us for the whole of it.",
-  },
+  { step: "01", title: "Define", body: "We read the scope the way the evaluator will, and confirm what is actually being bought." },
+  { step: "02", title: "Source", body: "We find the capability. Manufacturer, distributor, subcontractor, carrier, specialist." },
+  { step: "03", title: "Validate", body: "Capacity, lead time, authorization to sell, compliance. Checked before anything is promised." },
+  { step: "04", title: "Quote", body: "Priced for the buying method. Submitted complete, submitted on time." },
+  { step: "05", title: "Execute", body: "Purchase orders, schedules, documentation, every party moving the same direction." },
+  { step: "06", title: "Deliver", body: "Delivered against the line items, invoiced, supported through closeout." },
 ] as const;
 
 /** How we work with agencies: from solicitation to closeout. */
@@ -219,6 +229,30 @@ export const vehicles = [
   },
 ] as const;
 
+/** The brand moment. Used once, on the home page. Give it room. */
+export const brandMoment = {
+  heading: "Everything comes from somewhere.",
+  items: ["The equipment.", "The materials.", "The technology.", "The expertise."],
+  body: "Capability already exists. It is just scattered across companies that have never met.",
+  close: "We find it and put it to work.",
+} as const;
+
+/** Why Sourcework. Three principles, no essay. */
+export const principles = [
+  {
+    title: "Find the right source",
+    body: "We do not start with a catalog. We start with the job, then go find who can actually do it.",
+  },
+  {
+    title: "Verify before we commit",
+    body: "Capacity, lead time, authorization, compliance. Confirmed before a number goes on paper.",
+  },
+  {
+    title: "Own the outcome",
+    body: "One contract, one point of contact, one party accountable through delivery and closeout.",
+  },
+] as const;
+
 /** The three audiences the site routes, and where each one goes. */
 export const pathways = [
   {
@@ -255,15 +289,15 @@ export const teamingRoles = [
 export const supplierCriteria = [
   {
     title: "What we source",
-    body: "Products, equipment, technology, and specialized services against federal, state, and local requirements. Manufacturers, authorized distributors, subcontractors, freight providers, and specialty service providers.",
+    body: "Products, equipment, technology, and specialized services against federal, state, and local work. Manufacturers, authorized distributors, subcontractors, freight providers, and specialty providers.",
   },
   {
     title: "What we ask for",
-    body: "What you sell, where you can deliver, the brands you are authorized to represent, and whether you have sold into government before. Government experience is useful, not required.",
+    body: "What you sell, where you deliver, and the brands you are authorized to represent. Government experience is useful, not required.",
   },
   {
     title: "How it works",
-    body: "Registration puts you in front of requirements we are actively quoting. When one matches what you supply, we come to you with the specification, the quantity, and the deadline.",
+    body: "When something we are quoting matches what you supply, we come to you with the specification, the quantity, and the deadline.",
   },
 ] as const;
 

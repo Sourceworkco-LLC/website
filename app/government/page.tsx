@@ -21,7 +21,7 @@ export default function GovernmentPage() {
       <PageHero
         label="Government"
         title="Registered, and ready to quote."
-        intro="Everything a contracting officer needs to verify Sourcework and issue a requirement, on one page."
+        intro="Everything a contracting officer needs to verify Sourcework and send us work, on one page."
       />
 
       <Section label="Registration">
@@ -36,17 +36,17 @@ export default function GovernmentPage() {
               Company data.
             </h2>
             <p className="measure mt-6 text-obsidian/80">
-              Verified against the SAM.gov record. Items marked not yet published
-              are exactly that: they are not listed here until they are issued.
+              Verified against the SAM.gov record. Anything marked not yet
+              published is exactly that, and stays off this page until it is
+              issued.
             </p>
             <p className="measure mt-6 text-sm text-obsidian/70">
-              Sourcework holds no socioeconomic certifications, no contract
-              vehicles, and no federal past performance to date. Registration is
-              for all awards.
+              No socioeconomic certifications, no contract vehicles, no federal
+              past performance to date. Registration is for all awards.
             </p>
             <p className="measure mt-6 text-sm text-obsidian/70">
-              Requirements are acknowledged the same business day, with a direct
-              answer on whether we are quoting and what we need to price it.
+              Solicitations are acknowledged the same business day, with a direct
+              answer on whether we are quoting.
             </p>
           </div>
 
