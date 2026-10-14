@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { site } from "@/content/site";
 import {
+  aiServicesForm,
   contactForm,
   requirementForm,
   supplierForm,
@@ -12,7 +13,7 @@ export const runtime = "nodejs";
 
 /** Human labels for the email body, taken from the form schemas. */
 const labels = new Map<string, string>(
-  [...requirementForm, ...supplierForm, ...teamingForm, ...contactForm]
+  [...requirementForm, ...supplierForm, ...teamingForm, ...contactForm, ...aiServicesForm]
     .flatMap((group) => group.fields)
     .map((field) => [field.name, field.label]),
 );
@@ -22,6 +23,7 @@ const subjects: Record<string, string> = {
   supplier: "Supplier registration",
   teaming: "Teaming inquiry",
   contact: "General inquiry",
+  "ai-services": "AI services",
 };
 
 const looksLikeEmail = (value: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
@@ -84,6 +86,7 @@ export async function POST(request: Request) {
   }
 
   const who = fields.find(([label]) => label === "Company")?.[1]
+    ?? fields.find(([label]) => label === "Business name")?.[1]
     ?? fields.find(([label]) => label === "Agency or organization")?.[1]
     ?? fields.find(([label]) => label === "Name")?.[1]
     ?? email;

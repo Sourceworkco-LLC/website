@@ -47,6 +47,7 @@ export const nav = [
   { href: "/government", label: "Government" },
   { href: "/suppliers", label: "Suppliers" },
   { href: "/teaming", label: "Teaming" },
+  { href: "/ai-services", label: "AI Services" },
   { href: "/about", label: "About" },
 ] as const;
 
@@ -60,6 +61,7 @@ export const cta = {
   reference: { label: "View government profile", href: "/government" },
   explore: { label: "Explore capabilities", href: "/solutions" },
   email: { label: "Email Sourcework", href: "mailto:ryan@sourceworkco.com" },
+  aiAudit: { label: "Get a free AI audit", href: "/ai-services#contact" },
 } as const;
 
 /**

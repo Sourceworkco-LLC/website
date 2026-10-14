@@ -150,6 +150,21 @@ export function IntakeForm({
                       required={field.required}
                       className={control}
                     />
+                  ) : field.type === "select" ? (
+                    <select
+                      id={id}
+                      name={field.name}
+                      required={field.required}
+                      defaultValue=""
+                      className={control}
+                    >
+                      <option value="">Select one</option>
+                      {field.options?.map((option) => (
+                        <option key={option} value={option}>
+                          {option}
+                        </option>
+                      ))}
+                    </select>
                   ) : field.type === "file" ? (
                     <input
                       id={id}

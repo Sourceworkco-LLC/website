@@ -19,6 +19,7 @@ export type FieldType =
   | "date"
   | "number"
   | "textarea"
+  | "select"
   | "file";
 
 export type FormField = {
@@ -33,6 +34,8 @@ export type FormField = {
   accept?: string;
   multiple?: boolean;
   autoComplete?: string;
+  /** Choices for a `select`. The first rendered option is always a prompt. */
+  options?: readonly string[];
 };
 
 export type FormGroup = {
@@ -221,6 +224,65 @@ export const contactForm: FormGroup[] = [
       { name: "email", label: "Email", type: "email", required: true, half: true, autoComplete: "email" },
       { name: "phone", label: "Phone", type: "tel", half: true, autoComplete: "tel" },
       { name: "message", label: "How can we help", type: "textarea", required: true, rows: 5 },
+    ],
+  },
+];
+
+/**
+ * AI services intake, for /ai-services.
+ *
+ * Shorter than the requirement intake on purpose: a shop owner asking for the
+ * free audit should be done in under a minute. Business type and interest are
+ * selects so the reply can be prepared before anyone writes back.
+ */
+export const aiServicesForm: FormGroup[] = [
+  {
+    legend: "Your business",
+    fields: [
+      { name: "name", label: "Name", type: "text", required: true, half: true, autoComplete: "name" },
+      { name: "company", label: "Business name", type: "text", required: true, half: true, autoComplete: "organization" },
+      { name: "email", label: "Email", type: "email", required: true, half: true, autoComplete: "email" },
+      {
+        name: "businessType",
+        label: "Business type",
+        type: "select",
+        half: true,
+        options: [
+          "HVAC",
+          "Plumbing",
+          "Roofing",
+          "Med spa",
+          "Dental or ortho",
+          "Remodeling",
+          "Other local service",
+        ],
+      },
+      { name: "website", label: "Website", type: "url", half: true, autoComplete: "url" },
+      {
+        name: "interest",
+        label: "I am interested in",
+        type: "select",
+        half: true,
+        options: [
+          "Free 5 minute AI audit",
+          "Starter: Never Miss a Lead",
+          "Growth: Follow-Up Machine",
+          "Partner: Done-For-You Content",
+          "Not sure yet, send the audit first",
+        ],
+      },
+    ],
+  },
+  {
+    legend: "Your message",
+    fields: [
+      {
+        name: "message",
+        label: "What should we know?",
+        type: "textarea",
+        rows: 5,
+        help: "Example: We miss a lot of calls after 5 pm and our estimates go quiet. Send the audit when ready.",
+      },
     ],
   },
 ];

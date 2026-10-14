@@ -8,6 +8,7 @@ const routes = [
   "/rfq",
   "/suppliers",
   "/teaming",
+  "/ai-services",
   "/about",
   "/contact",
 ];
