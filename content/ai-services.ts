@@ -143,7 +143,7 @@ export const packages = {
         "No show and cancellation rebooking flows",
         "Review requests timed to job completion",
         "Past customer reactivation campaign each quarter",
-        "Monthly tuning call and performance report",
+        "Monthly performance video, plus new AI tools worth adding",
       ],
       note: "One extra booked job per month typically covers it.",
     },
